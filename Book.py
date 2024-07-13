@@ -1,4 +1,5 @@
 import re
+from Genre import Genre
 
 isbn_regex = r'\d{13}'
 date_regex = r'^\d{2}-\d{2}-\d{4}'
@@ -9,8 +10,9 @@ class SetterException(Exception):
     '''Exception raised when setter fails to meet regex requirements'''
     pass
 
-class Book:
-    def __init__(self, title, author, isbn, publication_date):
+class Book(Genre):
+    def __init__(self, genre_name, fict_or_nonfict, description, title, author, isbn, publication_date):
+        super().__init__(genre_name, fict_or_nonfict, description)
         self.__title = title
         self.__author = author
         self.__isbn = isbn
@@ -83,4 +85,4 @@ class Book:
             return False
         
     def display_details(self):
-        print(f"Title: {self.get_title()}\nAuthor: {self.get_author()}\nISBN: {self.get_isbn()}\nPublication Date: {self.get_publication_date()}\nAvailable to Borrow: {self.get_availability_status()}")
+        print(f"Title: {self.get_title()}\nAuthor: {self.get_author()}\nISBN: {self.get_isbn()}\nPublication Date: {self.get_publication_date()}\nAvailable to Borrow: {self.get_availability_status()}\nGenre: {self.get_genre_name()}\nGenre Type: {self.get_fict_or_nonfict()}\nGenre Description: {self.get_description()}")
