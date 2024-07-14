@@ -52,3 +52,10 @@ class Author():
         else:
             for book in self.get_authored_books():
                 print(book.get_title())
+
+'''
+The Author class starts with an init function that instantiates objects with protected variables for author name, home country, date of birth, and an empty list of authored books.
+I then have getters for all four of those variables. I then have a regex validated setter for new author name, a setter for new home cuntry, a regex validated setter for date of birth,
+and an add_authored_book() method that appends new books to the authored_books list using the getter for the authored_book list. Lastly I have a display_biography method that on individual lines
+prints the author's name, country of birth, and date of birth using getters. I then, also using the getter, loop through the uathored book list, and using the book Class's .get_title() method print the title of each Book object in the authored_book list
+'''

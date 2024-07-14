@@ -255,6 +255,16 @@ def user_operations_menu():
                 print("Invalid input, please enter a digit 1 to 4\n")
         else:
             raise InputNamingException("Invalid input, please enter an individual digit\n")
+        
+'''
+The user operations menu uses global dictionaries for the library_dictionary and user_dictionary as well as for the input_regex and name_regex variables.
+The function allows users to add new users, view details for users accounts searching by name or by library id, and prints a list of all users. It adds new users by taking inputs for the user's name and 
+library ID, and after validating the name input through a regular expression, assigns a value with a User class object (instantiated using the two inputs) at the key of library id in the user_dictionary dictionary.
+Option 2 allows the user to search for a user's details by taking a search criteria of name or library id. If the user decides to search by name we we prompt another input for the user to enter the name they are searching for and after validating the input via regex,
+we loop through the user_dictionary list of values and match the user input to the proper object using the .get_name() method. Once the proper User object is identified we call the .display_details method on it.
+If the user selects to search via Library ID  we use a similar logic but this time produce a match comparing the user input to the user_dictionary.keys() list. If the match is found we run the display_details() method on the User object at the match's key location.
+IF the user chooses option 3 we use the enumerate function to make a list of each object in the dictionary values and run the display_user_details() method on each of them. Option 4 breaks the loop and returns the user to the main menu
+'''
 
 def author_operations_menu():
     global input_regex
@@ -301,6 +311,15 @@ def author_operations_menu():
                 print("Invalid input, please enter a digit 1 to 4\n")
         else:
             raise InputNamingException("Invalid input, please enter an individual digit\n")
+        
+'''
+The author_operations_menu is a while loop with options 1-4 that allows the user to add author objects to the author list, display details for individual authors, or display details for each author. If the user chooses option 
+1 they can add an author and are prompted to input the new authors name. At this point we convert their input to titlecase and run a regex to validate their input. We then prompt the user for a country of birth and date of birth and once this information is stored and the date is validated to be in proper format
+We create the adding_author variable to store an Author class object witht he user inputs. If that object is not already in the global author list, we append it to the list. I also included logic to print a statement saying if the uathor is already in the list.
+Option 2 prompts the user for a name to searh for a specific author's biographical information. Once this input is validated via regex we try to loop through the author list and use the .get_author_name method on each object looking for a match with the user input.
+If there is a match we run the .display_biography method on that Author object, and I have an exception built in for an IndexError in case the user searches for an author not in the list, much like my earlier KeyError exceptions that handled searches for missing dictionary entries.
+Option 3 uses the enumerate function to loop through the entire list and numbers each biographical entry in our list. Option 4 returns the user to the main menu.
+'''
 
 def genre_operations_menu():
     global input_regex
@@ -362,6 +381,18 @@ def genre_operations_menu():
                 print("Invalid input, please enter a digit 1 to 5\n")
         else:
             raise InputNamingException("Invalid input, please enter an individual digit\n")
+        
+'''
+The genre_operations_menu() function is a while loop with 5 choices, the first which is to add a new genre. This works by asking for a new genre name input which we convert to title case. After validating this input
+via regex I use a list comprehension to store a list of each genre name using the .get_genre_name() method. If the user input is not in this list comprehension, we then take an input for fiction vs. non fiction and  validat ethat input via regex.
+I then take an input for the genre's description and use those three inputs to instaniate a Genre class object stored at adding_genre variable. We then append that variable to the global genre list.
+I also include logic to return a print statement if the user tries to add the same genre more than once. In option 2 the user can update the genre's description by first entering which genre they wish to edit.
+After validating that input via regex and starting a try block we loop through the genre list and try to find a match for the user input to a genre object's .get_genre_name() method. If there is a match we prompt the user to enter in their new edited description, and then use the set_description setter method to update
+that object. The result is printed in the terminal and ane else statement, as well as an IndexError exception handle any attempt to edit a genre that is not found in our list. Option 3 prompts the user for a genre name for which they are searching for to display its details.
+After validating that input via regex in a try block, we once again loop through the genre list and try to match the user input to the genre class's name getter method. Once there is a match we run the .display_genre_details() method on it and if there is not match we have an exception
+for an IndexError prompting the user to ensure that they are searching for a Genre object that has already been added to the list. Option 4 once again uses the enumerate function to loop through the entire list, numbeirng it while running the display_genre_details() method on each object.
+Option 5 breaks this while loop and returns the user to the main menu.
+'''
 
 
 
@@ -393,3 +424,8 @@ def main_menu():
 
 
 main_menu()
+
+'''
+The overall main_menu structure uses regex to validate that the user is entering a valid digit input. It gives the user options 1-5 that allows them to navigate to Book Operations, User Operations, Author Operations, Genre Operations, or to quit
+the program altogether. Options 1-4 call each specific menu's individual function and option 5 uses the break keyword to break this function's while loop and end the program.
+'''
